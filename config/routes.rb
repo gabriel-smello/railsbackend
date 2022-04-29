@@ -1,9 +1,16 @@
 Rails.application.routes.draw do
   resources :notes
-
-  resource :user, only: [:create]
+  resources :music
+  resources :user, only: [:create]
   post '/login', to: 'user#login'
   get '/auto_login', to: 'user#auto_login'
+
+
+  scope 'music' do
+    get 'index', to: 'music#index'
+    get 'order', to: 'music#order'
+    get 'show/:id', to: 'music#show'
+  end
 
   namespace 'api' do 
     namespace 'v1' do 
